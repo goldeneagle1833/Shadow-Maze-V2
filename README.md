@@ -22,10 +22,18 @@ Fetures
 
 
 Over all goal
-    one player would hid an object in a maze while the other player will try to find it within a
-    certain time frame 
-
-    if the player serching finds the goal they get a point
-        if not the other player will get a point
+    to start a MVP using a static maze and creating a time trail between two players 
     
-    first to a number wins 
+    strech goals
+        one player would hid an object in a maze while the other player will try to find it within a
+        certain time frame 
+
+        if the player serching finds the goal they get a point
+            if not the other player will get a point
+    
+        first to a number wins 
+
+Credit to https://youtu.be/TOEi6T2mtHo 
+I couldn't have done any of this with out his walkthough and explanations of the p5 libary 
+
+    
