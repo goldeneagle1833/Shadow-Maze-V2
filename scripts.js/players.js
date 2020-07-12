@@ -13,12 +13,13 @@ class Player {
     move(){
 
     }
+    
     show(x,y){
         fill(255)
-        ellipse(this.position.x, this.position.y, 10)
-        for(let ray of this.rays){
-            ray.show()
-        }
+        ellipse(/*this.position.x, this.position.y*/x,y, 10)
+        // for(let ray of this.rays){
+        //     ray.show()
+        // }
     }
     playerPostion(x,y){
         this.pos.set(x,y)
