@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+
+    <header class="header">Welcome to the Shadow Maze</header>
+    <button class="button" onclick="setup()" id="start">Start Game</button>
+    <button class="button" onclick="playerOne()" id="start">Player One</button>
+    <button class="button" onclick="draw()" id="start">Players</button>
     
-    <script src="/scripts.js/boundary.js"></script>
-    <script src="/scripts.js/players.js"></script>
-    <script src="/scripts.js/vision.js"></script>
-    <script src="/scripts.js/game.js"></script>
-    <input type="button" value="start game" onclick="setup()">
-    <button onclick='setup()' id="start">Start Game</button>
-    <button onclick='playerOne()' id="start">Player One</button>
-    <button onclick='draw()' id="start">Player Two</button>
-    <input type="button" value="Timer" onclick="timer()">
-    <p id="timer">Time</p>
-</body>
+    
+    <button class="button" id="myBtn">Rules</button>
+
+    
+    <div id="myModal" class="modal">
+    
+
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1>RULES</h1>
+        <h2>1) Finsh the maze within the time</h1>
+        <h2>2) First to finsh the maze wins</h1>
+        <h2>3) The points will out line the maze</h1>
+        <h2>4) Good luck its not very hard</h1>
+
+      </div>
+    
+    </div>
+
+
+
+    <button class="button" id="cont">Controls</button>
+
+    <div id="control" class="controls">
+    
+
+        <div class="modal-content">
+          <span class="closes">&times;</span>
+          <h1>Controls</h1>
+          <h2>Player One</h1>
+          <h3>W A S D</h1>
+          <h2>Player Two</h1>
+          <h3>Arrows UP Left Down Right</h1>
+  
+        </div>
+      
+      </div>
+      
+      <div class="label">Timer:</div>
+    <div class="timerDiv" id="timer"></div>
+
+    <div class="gameDiv">
+      <script class="game" src="/scripts.js/boundary.js"></script>
+    <script class="game" src="/scripts.js/players.js"></script>
+    <script class="game" src="/scripts.js/vision.js"></script>
+    <script class="game" src="/scripts.js/game.js"></script>
+  </div>
+
+    
+
+  </body>
+  
 </html>

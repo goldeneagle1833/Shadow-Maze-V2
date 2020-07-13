@@ -1,35 +1,34 @@
 let maze = [];
 let player;
 
-
-let counter = 0;
-let timerLife = 60;
-
 function setup() {
   createCanvas(1000, 1000);
   background(0);
   noStroke();
   fill(100);
   ///////
-  // Timer works just commit to simplify
+  // Timer works just commited to simplify
   ///////
+  let counter = 0;
+  let timerLife = 60;
 
+  const stopTime = setInterval(timeIt, 1000);
 
-//   const stopTime = setInterval(timeIt, 1000);
+  let timer = document.getElementById("timer");
 
-//   const timer = select("#timer");
-//   timer.html(counter);
-//   function timeIt() {
-//     counter++;
-//     timer.html(timerLife - counter);
-//     if (counter == timerLife) {
-//       clearInterval(stopTime);
-//       alert("Game Over");
-//       location.reload();
-//       //counter = 0;
-//     }
-//   }
+  function timeIt() {
+    counter++;
 
+    timerLife - counter;
+
+    timer.innerHTML = `${counter}`;
+
+    if (counter == timerLife) {
+      clearInterval(stopTime);
+      //alert("Game Over");
+      location.reload();
+    }
+  }
   /////////
   // Maze
   ////////
@@ -97,17 +96,25 @@ function setup() {
   //     return element
   //   }
 
-  player = new Player();
+  player = new Player(250,250);
 }
 
 function draw() {
   background(0);
+  
+  if (keyIsDown(LEFT_ARROW)) {
+    player.move(-10, 0);
+  } else if (keyIsDown(RIGHT_ARROW)) {
+    player.move(10,0);
+  } else if (keyIsDown(UP_ARROW)) {
+    player.move(0, -10);
+  } else if (keyIsDown(DOWN_ARROW)) {
+    player.move(0, 10);
+  }
+
   for (let wall of maze) {
     wall.show();
   }
-
-
-
   // trying to loop through the array made in the setup function
   //   for (let w of walls) {
   //     w.show();
@@ -119,8 +126,7 @@ function draw() {
     Math.floor(Math.random() * 255),
     Math.floor(Math.random() * 255)
   );
-  player.drawLines(maze)
-  
+  //player.drawLines(maze)
 
   //   playerTwo.show(
   //     75,
@@ -130,7 +136,8 @@ function draw() {
   //     Math.floor(Math.random() * 255)
   //   );
   //playerVision.rayCheck(mouseX, mouseY);
-  playerVision.cast();
+
+  //player.rays.cast();
   //noloop();
   //   let pt = playerVision.rayCheck(maze);
   //   if (pt) {
@@ -139,3 +146,65 @@ function draw() {
   //     strokeWeight(2);
   //   }
 }
+
+// let startingTime = .1;
+// let time = startingTime * 60;
+// const counterElm = document.getElementById("timer");
+// const stopTime = setInterval(updateTimer, 1000)
+// function updateTimer() {
+//     const minutes = Math.floor( time / 60)
+//     const sec = time % 60
+//     counterElm.innerHTML =`${minutes}:${sec}`
+//   time++;
+// time = time < 0 ? 0 : time;
+//   if (sec <= 0)
+//   clearInterval(stopTime)
+//   alert('gameover')
+//   location.reload()
+// }
+
+////////
+// Rules
+////////
+const modal = document.getElementById("myModal");
+// Get the button that opens the modal
+const btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+////////
+// Controls
+////////
+const con = document.getElementById("control");
+// Get the button that opens the modal
+const bttn = document.getElementById("cont");
+// Get the <span> element that closes the modal
+const spans = document.getElementsByClassName("closes")[0];
+// When the user clicks on the button, open the modal
+bttn.onclick = function () {
+  con.style.display = "block";
+};
+// When the user clicks on <span> (x), close the modal
+spans.onclick = function () {
+  con.style.display = "none";
+};
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == con) {
+    con.style.display = "none";
+  }
+};

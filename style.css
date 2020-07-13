@@ -1,0 +1,160 @@
+body {
+  background: linear-gradient(black,white);
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.header{
+    font-style: italic;
+    font-weight: 100;
+    position: relative;
+    left: 500px;
+    top: -400px;
+    color: white;
+    font-size: x-large;
+}
+.game {
+  align-content: center;
+  cursor: pointer;
+}
+.timerDiv {
+  position: absolute;
+  background-position: center;
+  left: 200px;
+  top: 400px;
+  margin: 0;
+  font-size: xx-large;
+  height: 70px;
+  width: 150px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 200;
+  font-size: xx-large;
+  border: white;
+  color: rgb(0, 0, 0);
+}
+
+.label{
+    position: absolute;
+  background-position: center;
+  left: 100px;
+  top: 400px;
+  margin: 0;
+  font-size: xx-large;
+  height: 70px;
+  width: 150px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 200;
+  font-size: xx-large;
+  border: white;
+  color: rgb(0, 0, 0);
+}
+p {
+  background-position: center;
+  background-color: hsl(0, 0%, 100%);
+  margin: 0;
+  font-size: 50;
+  height: 70px;
+  width: 200px;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: xx-large;
+  border: white;
+}
+.button {
+  box-shadow: inset 1px 13px 7px 0px #29bbff;
+  background: linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+  background-color: #2dabf9;
+  border-radius: 8px;
+  border: 1px solid #0b0e07;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 19px;
+  padding: 9px 23px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #263666;
+  align-content: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* The Modal Rules */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /*controls*/
+  .controls {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .contols-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .closes {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .closes:hover,
+  .closes:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

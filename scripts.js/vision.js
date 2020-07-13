@@ -14,6 +14,10 @@ class Vision {
 //   rayCheck(x,y) {
 //       this.pos.set(x,y)
 //   }
+move(x) {
+    
+    this.pos.set(mouseX, mousey);
+  }
 
   //cast is need because the when drawing the players visions needs to be shown from players postion to the wall of the maze and that is done by checking the vector created against all of the walls in the maze
 
