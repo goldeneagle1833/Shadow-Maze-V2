@@ -96,7 +96,8 @@ function setup() {
   //     return element
   //   }
 
-  player = new Player(250,250);
+  player = new Player();
+  playerTwo = new Player()
 }
 
 function draw() {
@@ -110,6 +111,15 @@ function draw() {
     player.move(0, -10);
   } else if (keyIsDown(DOWN_ARROW)) {
     player.move(0, 10);
+  }
+  if (keyIsDown(65)) {
+    playerTwo.move(-10, 0);
+  } else if (keyIsDown(68)) {
+    playerTwo.move(10,0);
+  } else if (keyIsDown(87)) {
+    playerTwo.move(0, -10);
+  } else if (keyIsDown(83)) {
+    playerTwo.move(0, 10);
   }
 
   for (let wall of maze) {
@@ -126,42 +136,15 @@ function draw() {
     Math.floor(Math.random() * 255),
     Math.floor(Math.random() * 255)
   );
-  //player.drawLines(maze)
-
-  //   playerTwo.show(
-  //     75,
-  //     50,
-  //     Math.floor(Math.random() * 255),
-  //     Math.floor(Math.random() * 255),
-  //     Math.floor(Math.random() * 255)
-  //   );
-  //playerVision.rayCheck(mouseX, mouseY);
-
-  //player.rays.cast();
-  //noloop();
-  //   let pt = playerVision.rayCheck(maze);
-  //   if (pt) {
-  //     fill(255);
-  //     ellipse(pt.x, pt.y, 8, 8);
-  //     strokeWeight(2);
-  //   }
+  playerTwo.show(
+    50,
+    40,
+    Math.floor(Math.random() * 255),
+    Math.floor(Math.random() * 255),
+    Math.floor(Math.random() * 255)
+  );
 }
 
-// let startingTime = .1;
-// let time = startingTime * 60;
-// const counterElm = document.getElementById("timer");
-// const stopTime = setInterval(updateTimer, 1000)
-// function updateTimer() {
-//     const minutes = Math.floor( time / 60)
-//     const sec = time % 60
-//     counterElm.innerHTML =`${minutes}:${sec}`
-//   time++;
-// time = time < 0 ? 0 : time;
-//   if (sec <= 0)
-//   clearInterval(stopTime)
-//   alert('gameover')
-//   location.reload()
-// }
 
 ////////
 // Rules
