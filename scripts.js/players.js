@@ -66,7 +66,9 @@ class Vision {
 
 class Redplayer {
   constructor() {
-    this.position = createVector(50,50) ;
+    this.position = createVector(50, 50);
+    this.positionX = this.position.x;
+    this.positionY = this.position.y;
     this.rays = [];
     for (let angle = 0; angle < 360; angle += 8) {
       this.rays.push(new Vision(this.position, radians(angle)));
@@ -115,6 +117,16 @@ class Redplayer {
       ray.show();
     }
   }
+
+  getPositionX() {
+    let xpos = this.position.x;
+    return xpos;
+  }
+  getPositionY() {
+    let ypos = this.position.y;
+    return ypos;
+  }
+
   /*
       cast(wall) {
         const x1 = wall.a.x;
@@ -153,8 +165,10 @@ class Redplayer {
 }
 class Blueplayer {
   constructor() {
-    this.position = createVector(75,50);
+    this.position = createVector(75, 50);
     this.rays = [];
+    this.positionX = this.position.x;
+    this.positionY = this.position.y;
     for (let angle = 0; angle < 360; angle += 8) {
       this.rays.push(new Vision(this.position, radians(angle)));
     }
@@ -202,6 +216,18 @@ class Blueplayer {
       ray.show();
     }
   }
+  getPositionX() {
+    let newX = this.position.x
+   // console.log(newX)
+    return newX
+  }
+  getPositionY() {
+    let newY = this.position.y
+    //console.log(newY)
+    return newY
+  }
+
+  
   /*
         cast(wall) {
           const x1 = wall.a.x;
