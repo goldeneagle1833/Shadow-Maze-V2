@@ -6,6 +6,8 @@ function setup() {
   background(0);
   noStroke();
   fill(100);
+  randomWall = new Boundary(300, 100, 300, 300);
+  randomline = new VisionTest(100, 200);
   ///////
   // Timer works just commited to simplify
   ///////
@@ -97,54 +99,61 @@ function setup() {
   //   }
 
   player = new Player();
-  playerTwo = new Player()
+  playerTwo = new Player();
 }
 
 function draw() {
   background(0);
-  
+
+  /////////////
+  // Player one movement
+  /////////////////
   if (keyIsDown(LEFT_ARROW)) {
     player.move(-10, 0);
   } else if (keyIsDown(RIGHT_ARROW)) {
-    player.move(10,0);
+    player.move(10, 0);
   } else if (keyIsDown(UP_ARROW)) {
     player.move(0, -10);
   } else if (keyIsDown(DOWN_ARROW)) {
     player.move(0, 10);
   }
+
+  ///////////
+  // Player two movement
+  //////////
   if (keyIsDown(65)) {
     playerTwo.move(-10, 0);
   } else if (keyIsDown(68)) {
-    playerTwo.move(10,0);
+    playerTwo.move(10, 0);
   } else if (keyIsDown(87)) {
     playerTwo.move(0, -10);
   } else if (keyIsDown(83)) {
     playerTwo.move(0, 10);
   }
-
+  //////////
+  // Draws all the walls
+  ///////////
   for (let wall of maze) {
     wall.show();
   }
-  // trying to loop through the array made in the setup function
-  //   for (let w of walls) {
-  //     w.show();
-  //   }
-  player.show(
-    50,
-    40,
-    Math.floor(Math.random() * 255),
-    Math.floor(Math.random() * 255),
-    Math.floor(Math.random() * 255)
-  );
-  playerTwo.show(
-    50,
-    40,
-    Math.floor(Math.random() * 255),
-    Math.floor(Math.random() * 255),
-    Math.floor(Math.random() * 255)
-  );
-}
+  ////////////
+  // Draws the players and their vision
+  ////////////
+  player.show(50, 40, 255, 0, 0);
+  playerTwo.show(50, 40, 0, 0, 255);
 
+
+  //let pts = player.cast(randomWall);
+  randomline.show();
+  randomWall.show();
+  randomline.lookAt(mouseX,mouseY)
+
+
+  let pt = randomline.cast(randomWall);
+  if (pt) {
+    ellipse(pt.x, pt.y, 8, 8);
+  }
+}
 
 ////////
 // Rules

@@ -4,7 +4,7 @@ class Boundary {
         this.b = createVector(x2, y2);
     }
     show() {
-        stroke(500);
+        stroke(255);
         line(this.a.x, this.a.y, this.b.x, this.b.y);
     }
 }
