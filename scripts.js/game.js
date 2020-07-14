@@ -66,159 +66,6 @@ class VisionTest {
   }
 }
 
-class Vision {
-  constructor(pos, direction) {
-    this.pos = pos;
-    this.dir = p5.Vector.fromAngle(direction);
-  }
-
-  lookAt(x, y) {
-    this.dir.x = x - this.pos.x;
-    this.dir.y = y - this.pos.y;
-    this.dir.normalize();
-  }
-
-  show() {
-    stroke(255);
-    push();
-    translate(this.pos.x, this.pos.y);
-    line(0, 0, this.dir.x * 1, this.dir.y * 1);
-    pop();
-  }
-  //   rayCheck(x,y) {
-  //       this.pos.set(x,y)
-  //   }
-
-  //cast is need because the when drawing the players visions needs to be shown from players postion to the wall of the maze and that is done by checking the vector created against all of the walls in the maze
-
-  //cast is using line line intersection formula found https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
-
-  //this section is directly from this time stamp
-  //https://youtu.be/TOEi6T2mtHo?t=609
-
-  cast(wall) {
-    const x1 = wall.a.x;
-    const y1 = wall.a.y;
-    const x2 = wall.b.x;
-    const y2 = wall.b.y;
-    // walls defining points
-
-    const x3 = this.pos.x;
-    const y3 = this.pos.y;
-    const x4 = this.pos.x + this.dir.x;
-    const y4 = this.pos.y + this.dir.y;
-    // the players vision is define in rays and is defined by the line segmint pulse the angle of the ray
-
-    const denOfFormula = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    //this if statment is need to show if the ray and the wall is perfectly parrell
-    if (denOfFormula == 0) {
-      return;
-    }
-
-    const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denOfFormula;
-    const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denOfFormula;
-
-    //The intersection point falls within the first line segment if 0.0 ≤ t ≤ 1.0, and it falls within the second line segment if 0.0 ≤ u ≤ 1.0.
-
-    // this if statment is checking the above comment statement
-    if (t > 0 && t < 1 && u > 0) {
-      const pt = createVector();
-      pt.x = x1 + t * (x2 - x1);
-      pt.y = y1 + t * (y2 - y1);
-      return pt;
-    } else {
-      return;
-    }
-  }
-}
-
-class Player {
-  constructor() {
-    this.position = createVector();
-    this.rays = [];
-    for (let angle = 0; angle < 360; angle += 10) {
-      this.rays.push(new Vision(this.position, radians(angle)));
-    }
-  }
-
-  lookAtSimple(maze) {
-    for (let ray of this.rays) {
-      const pt = ray.cast(maze);
-      if (pt) {
-        line(this.position.x, this.position.y, pt.x, pt.y);
-      }
-    }
-  }
-
-  lookAtWalls(maze) {
-    for (let ray of this.rays) {
-      let closest = null;
-      let record = Infinity;
-      for (let wall of maze) {
-        const pt = ray.cast(wall);
-        if (pt) {
-          const d = p5.Vector.dist(this.position, pt);
-          if (d < record) {
-            record = d;
-            closest = pt;
-          }
-        }
-      }
-      if (closest) {
-        line(this.position.x, this.position.y, closest.x, closest.y);
-      }
-    }
-  }
-
-  move(x, y) {
-    this.position.add(x, y);
-  }
-
-  show(x, y, c1, c2, c3) {
-    fill(c1, c2, c3);
-    ellipse(this.position.x, this.position.y, 10);
-
-    for (let ray of this.rays) {
-      ray.show();
-    }
-  }
-  /*
-    cast(wall) {
-      const x1 = wall.a.x;
-      const y1 = wall.a.y;
-      const x2 = wall.b.x;
-      const y2 = wall.b.y;
-      // walls defining points
-  
-      const x3 = this.pos.x;
-      const y3 = this.pos.y;
-      const x4 = this.pos.x + this.dir.x;
-      const y4 = this.pos.y + this.dir.y;
-      // the players vision is define in rays and is defined by the line segmint pulse the angle of the ray
-  
-      const denOfFormula = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-      //this if statment is need to show if the ray and the wall is perfectly parrell
-      if (denOfFormula == 0) {
-        return;
-      }
-  
-      const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denOfFormula;
-      const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denOfFormula;
-  
-      //The intersection point falls within the first line segment if 0.0 ≤ t ≤ 1.0, and it falls within the second line segment if 0.0 ≤ u ≤ 1.0.
-  
-      // this if statment is checking the above comment statement
-      if (t > 0 && t < 1 && u > 0) {
-        const pt = createVector();
-        pt.x = x1 + t * (x2 - x1);
-        pt.y = y1 + t * (y2 - y1);
-        return pt;
-      } else {
-        return;
-      }
-    }*/
-}
-
 function setup() {
   createCanvas(1000, 1000);
   background(0);
@@ -254,7 +101,7 @@ function setup() {
   ////////
   //wall = new Boundary(x1, y1, x2, y2)
   wallOne = new Boundary(25, 25, 25, 975);
-  wallTwo = new Boundary(100, 975, 25, 25);
+  wallTwo = new Boundary(25, 975, 25, 25);
   wallThree = new Boundary(975, 975, 25, 975);
   wallFour = new Boundary(25, 900, 975, 975);
   insideWallOne = new Boundary(100, 100, 25, 250);
@@ -273,11 +120,28 @@ function setup() {
   wrongWayThree = new Boundary(900, 900, 850, 325);
   wrongWayFour = new Boundary(825, 325, 500, 500);
   wrongWayFive = new Boundary(725, 825, 575, 575);
-  wrongWaySix = new Boundary(825, 825, 850, 575);
+  wrongWaySix = new Boundary(825, 825, 850, 400);
   wrongWaySeven = new Boundary(650, 100, 825, 825);
   wrongWayEight = new Boundary(425, 100, 750, 750);
-  wrongWayNine = new Boundary();
+  wrongWayNine = new Boundary(400, 825, 400, 400);
   wrongWayTen = new Boundary();
+  wrongWayUpOne = new Boundary(675, 675, 250, 100);
+  wrongWayUpTwo = new Boundary(675, 900, 100, 100);
+  wrongWayUpThree = new Boundary(600, 600, 250, 100);
+  wrongWayUpFour = new Boundary(400, 600, 100, 100);
+  wrongWayUpFive = new Boundary(100, 325, 100, 100);
+  wrongWayUpSix = new Boundary(325, 325, 175, 100);
+  wrongWayUpSeven = new Boundary(400, 400, 175, 100);
+  wrongWayLeftOne = new Boundary(500, 500, 750, 650)
+  wrongWayLeftTwo = new Boundary(425, 425, 750, 650)
+  wrongWayLeftThree= new Boundary(100, 100, 750, 400)
+  wrongWayLeftFour = new Boundary(425, 175, 650, 650)
+  wrongWayLeftFive = new Boundary(175, 175, 650, 400)
+  wrongWayLeftSix = new Boundary(500, 575, 650, 650)
+  wrongWayLeftSeven = new Boundary(100, 100, 900, 825)
+  wrongWayLeftEight = new Boundary(575, 100, 900, 900)
+
+
 
   winningWall = new Boundary(875, 995, 995, 995);
   maze.push(
@@ -306,7 +170,23 @@ function setup() {
     wrongWaySeven,
     wrongWayEight,
     wrongWayNine,
-    wrongWayTen
+    wrongWayTen,
+    wrongWayUpOne,
+    wrongWayUpThree,
+    wrongWayUpTwo,
+    wrongWayUpFive,
+    wrongWayUpFour,
+    wrongWayUpSix,
+    wrongWayUpSeven,
+    wrongWayLeftOne,
+    wrongWayLeftTwo, 
+    wrongWayLeftThree, 
+    wrongWayLeftFour, 
+    wrongWayLeftFive, 
+    wrongWayLeftSeven,
+    wrongWayLeftSix,
+    wrongWayLeftEight,
+    wrongWayLeftSeven
   );
 
   // trying to import the boundaries so it all wouldnt be so messy
@@ -316,8 +196,8 @@ function setup() {
   //     return element
   //   }
 
-  player = new Player();
-  playerTwo = new Player();
+  player = new Redplayer();
+  playerTwo = new Blueplayer();
 }
 
 function draw() {
@@ -327,26 +207,26 @@ function draw() {
   // Player one movement
   /////////////////
   if (keyIsDown(LEFT_ARROW)) {
-    player.move(-1, 0);
+    player.move(-2, 0);
   } else if (keyIsDown(RIGHT_ARROW)) {
-    player.move(1, 0);
+    player.move(2, 0);
   } else if (keyIsDown(UP_ARROW)) {
-    player.move(0, -1);
+    player.move(0, -2);
   } else if (keyIsDown(DOWN_ARROW)) {
-    player.move(0, 1);
+    player.move(0, 2);
   }
 
   ///////////
   // Player two movement
   //////////
   if (keyIsDown(65)) {
-    playerTwo.move(-1, 0);
+    playerTwo.move(-2, 0);
   } else if (keyIsDown(68)) {
-    playerTwo.move(1, 0);
+    playerTwo.move(2, 0);
   } else if (keyIsDown(87)) {
-    playerTwo.move(0, -1);
+    playerTwo.move(0, -2);
   } else if (keyIsDown(83)) {
-    playerTwo.move(0, 1);
+    playerTwo.move(0, 2);
   }
   //////////
   // Draws all the walls
