@@ -241,6 +241,7 @@ function setup() {
 
   player = new Redplayer();
   playerTwo = new Blueplayer();
+  
 }
 
 function draw() {
