@@ -73,15 +73,8 @@ class Redplayer {
     for (let angle = 0; angle < 360; angle += 8) {
       this.rays.push(new Vision(this.position, radians(angle)));
     }
-  }
-
-  lookAtSimple(maze) {
-    for (let ray of this.rays) {
-      const pt = ray.cast(maze);
-      if (pt) {
-        line(this.position.x, this.position.y, pt.x, pt.y);
-      }
-    }
+    
+    
   }
 
   lookAtWalls(maze) {
@@ -126,42 +119,73 @@ class Redplayer {
     let ypos = this.position.y;
     return ypos;
   }
+  wallDectVertRight = function (ax, ay, bx, by, x) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
 
-  /*
-      cast(wall) {
-        const x1 = wall.a.x;
-        const y1 = wall.a.y;
-        const x2 = wall.b.x;
-        const y2 = wall.b.y;
-        // walls defining points
-    
-        const x3 = this.pos.x;
-        const y3 = this.pos.y;
-        const x4 = this.pos.x + this.dir.x;
-        const y4 = this.pos.y + this.dir.y;
-        // the players vision is define in rays and is defined by the line segmint pulse the angle of the ray
-    
-        const denOfFormula = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-        //this if statment is need to show if the ray and the wall is perfectly parrell
-        if (denOfFormula == 0) {
-          return;
-        }
-    
-        const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denOfFormula;
-        const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denOfFormula;
-    
-        //The intersection point falls within the first line segment if 0.0 ≤ t ≤ 1.0, and it falls within the second line segment if 0.0 ≤ u ≤ 1.0.
-    
-        // this if statment is checking the above comment statement
-        if (t > 0 && t < 1 && u > 0) {
-          const pt = createVector();
-          pt.x = x1 + t * (x2 - x1);
-          pt.y = y1 + t * (y2 - y1);
-          return pt;
-        } else {
-          return;
-        }
-      }*/
+    if (wallDection && this.position.x > x) {
+      console.log("right");
+      player.move(ifHit, 0);
+    }
+  };
+  wallDectVertLeft = function (ax, ay, bx, by, x) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.x < x) {
+      console.log("left");
+      player.move(-ifHit, 0);
+    }
+  };
+  wallDectHorizUp = function (ax, ay, bx, by, y) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.y > y) {
+      console.log("down");
+      player.move(ifHit, 0);
+    }
+  };
+  wallDectHorizDown = function (ax, ay, bx, by, y) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.y < y) {
+      console.log("up");
+      player.move(0, -ifHit);
+    }
+  };
+
+  
 }
 class Blueplayer {
   constructor() {
@@ -172,6 +196,7 @@ class Blueplayer {
     for (let angle = 0; angle < 360; angle += 8) {
       this.rays.push(new Vision(this.position, radians(angle)));
     }
+    
   }
 
   lookAtSimple(maze) {
@@ -203,7 +228,6 @@ class Blueplayer {
       }
     }
   }
-
   move(x, y) {
     this.position.add(x, y);
   }
@@ -217,50 +241,79 @@ class Blueplayer {
     }
   }
   getPositionX() {
-    let newX = this.position.x
-   // console.log(newX)
-    return newX
+    let newX = this.position.x;
+    // console.log(newX)
+    return newX;
   }
   getPositionY() {
-    let newY = this.position.y
+    let newY = this.position.y;
     //console.log(newY)
-    return newY
+    return newY;
   }
+  wallDectVertRight = function (ax, ay, bx, by, x) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
 
-  
-  /*
-        cast(wall) {
-          const x1 = wall.a.x;
-          const y1 = wall.a.y;
-          const x2 = wall.b.x;
-          const y2 = wall.b.y;
-          // walls defining points
-      
-          const x3 = this.pos.x;
-          const y3 = this.pos.y;
-          const x4 = this.pos.x + this.dir.x;
-          const y4 = this.pos.y + this.dir.y;
-          // the players vision is define in rays and is defined by the line segmint pulse the angle of the ray
-      
-          const denOfFormula = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-          //this if statment is need to show if the ray and the wall is perfectly parrell
-          if (denOfFormula == 0) {
-            return;
-          }
-      
-          const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denOfFormula;
-          const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denOfFormula;
-      
-          //The intersection point falls within the first line segment if 0.0 ≤ t ≤ 1.0, and it falls within the second line segment if 0.0 ≤ u ≤ 1.0.
-      
-          // this if statment is checking the above comment statement
-          if (t > 0 && t < 1 && u > 0) {
-            const pt = createVector();
-            pt.x = x1 + t * (x2 - x1);
-            pt.y = y1 + t * (y2 - y1);
-            return pt;
-          } else {
-            return;
-          }
-        }*/
+    if (wallDection && this.position.x > x) {
+      console.log("right");
+      playerTwo.move(ifHit, 0);
+    }
+  };
+  wallDectVertLeft = function (ax, ay, bx, by, x) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.x < x) {
+      console.log("left");
+      playerTwo.move(-ifHit, 0);
+    }
+  };
+  wallDectHorizUp = function (ax, ay, bx, by, y) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.y > y) {
+      console.log("down");
+      playerTwo.move(ifHit, 0);
+    }
+  };
+  wallDectHorizDown = function (ax, ay, bx, by, y) {
+    let wallDection = false;
+    wallDection = collideLineCircle(
+      ax,
+      ay,
+      bx,
+      by,
+      this.position.x,
+      this.position.y,
+      10
+    );
+    if (wallDection && this.position.y < y) {
+      console.log("up");
+      playerTwo.move(0, -ifHit);
+    }
+  };
+
 }

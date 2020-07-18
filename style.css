@@ -33,7 +33,7 @@ body {
   font-weight: 200;
   font-size: xx-large;
   border: white;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .label {
@@ -48,8 +48,8 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 200;
   font-size: xx-large;
-  border: white;
-  color: rgb(0, 0, 0);
+  border: rgb(251, 251, 251);
+  color: rgb(253, 246, 246);
 }
 p {
   background-position: center;
