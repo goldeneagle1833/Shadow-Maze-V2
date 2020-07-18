@@ -1,5 +1,5 @@
 let maze = [];
-let movementSpeed = 2;
+let movementSpeed = 5;
 let ifHit = 5;
 let hit = false; // winner wall
 let vertMaze = [];
@@ -109,7 +109,7 @@ function setup() {
     wrongWayLeftSeven
   );
   horizontalMaze.push(
-    winningWall,
+    
     wallTwo,
     wallThree,
     insideWallTwo,
@@ -241,10 +241,10 @@ function draw() {
   //hit dectection for player one winning wall
   //////////
   hit = collideLineCircle(
-    horizontalMaze[0].a.x,
-    horizontalMaze[0].a.y,
-    horizontalMaze[0].b.x,
-    horizontalMaze[0].b.y,
+    maze[0].a.x,
+    maze[0].a.y,
+    maze[0].b.x,
+    maze[0].b.y,
     player.getPositionX(),
     player.getPositionY(),
     10
@@ -344,10 +344,10 @@ function draw() {
   //hit dectection for player two winning wall
   //////////
   hit = collideLineCircle(
-    horizontalMaze[0].a.x,
-    horizontalMaze[0].a.y,
-    horizontalMaze[0].b.x,
-    horizontalMaze[0].b.y,
+    maze[0].a.x,
+    maze[0].a.y,
+    maze[0].b.x,
+    maze[0].b.y,
     playerTwo.getPositionX(),
     playerTwo.getPositionY(),
     10
@@ -410,3 +410,21 @@ window.onclick = function (event) {
 function reload() {
   location.reload();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
