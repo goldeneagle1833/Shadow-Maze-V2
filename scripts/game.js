@@ -128,6 +128,7 @@ function setup() {
     wrongWayUpFive,
     wrongWayLeftFour,
     wrongWayLeftEight
+    
   );
   maze.push(
     winningWall, //0

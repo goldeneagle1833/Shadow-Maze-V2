@@ -165,7 +165,7 @@ class Redplayer {
     );
     if (wallDection && this.position.y > y) {
       console.log("down");
-      player.move(ifHit, 0);
+      player.move(0,ifHit);
     }
   };
   wallDectHorizDown = function (ax, ay, bx, by, y) {
@@ -296,7 +296,7 @@ class Blueplayer {
     );
     if (wallDection && this.position.y > y) {
       console.log("down");
-      playerTwo.move(ifHit, 0);
+      playerTwo.move(0,ifHit);
     }
   };
   wallDectHorizDown = function (ax, ay, bx, by, y) {
